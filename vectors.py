@@ -10,7 +10,7 @@ while True:
         user_operation = op.strip()
         break
 
-def get_vect_cords(message, operation):
+def get_vect_cords(message):
     while True:
         cords = input(message)
         try:
@@ -23,11 +23,6 @@ def get_vect_cords(message, operation):
             if len(vect_cords) > 3:
                 print("გთხოვთ შეიტანოთ მაქსიმუმ სამი კორდინატი!")
                 continue
-
-            if operation == "შეკრება" :
-                while len(vect_cords) < 3:
-                    vect_cords.append(0.0) # თუ მომხმარებელი შეკრების ოპერაციას ირჩევს და სამივე კორდინატი არ შეჰყავს პროგრამა ავტომატურად ნულებით ანაცვლებს გამოტოვებულ კორდინატს
-                    return vect_cords
            
             return vect_cords
             
@@ -35,23 +30,23 @@ def get_vect_cords(message, operation):
             print("გთხოვთ შეიტანოთ კორდინატები რიცხვითი ფორმატით!")
 
 if user_operation == "შეკრება":
-    v1_cords = get_vect_cords("გთოვთ შეიტანოთ პირველი ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5 (თუ რომელიმე კორდინატს არ შეიტანთ პროგრამა ავტომატურად ნულოვან მნიშვნელობას მიანიჭებს): ", user_operation)
-    v2_cords = get_vect_cords("გთოვთ შეიტანოთ მეორე ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5 (თუ რომელიმე კორდინატს არ შეიტანთ პროგრამა ავტომატურად ნულოვან მნიშვნელობას მიანიჭებს): ", user_operation)
+    v1_cords = get_vect_cords("გთოვთ შეიტანოთ პირველი ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5 (თუ რომელიმე კორდინატს არ შეიტანთ პროგრამა ავტომატურად ნულოვან მნიშვნელობას მიანიჭებს): ")
+    v2_cords = get_vect_cords("გთოვთ შეიტანოთ მეორე ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5 (თუ რომელიმე კორდინატს არ შეიტანთ პროგრამა ავტომატურად ნულოვან მნიშვნელობას მიანიჭებს): ")
 else:
-    v1_cords = get_vect_cords("გთოვთ შეიტანოთ პირველი ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5: ", user_operation)
-    v2_cords = get_vect_cords("გთოვთ შეიტანოთ მეორე ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5: ", user_operation)
+    v1_cords = get_vect_cords("გთოვთ შეიტანოთ პირველი ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5: ")
+    v2_cords = get_vect_cords("გთოვთ შეიტანოთ მეორე ვექტორის კორდინატები რიცხვითი ფორმატით. მაგ. 1,2,3.5: ")
 
 
 
 class VectorClass:
-    def __init__(self, x = 0, y = 0, z = 0):
+    def __init__(self, x = 0.0, y = 0.0, z = 0.0):
         self.x = x
         self.y = y
         self.z = z
 
     def __mul__(self, other):
        
-       if isinstance(other,(float)):
+       if isinstance(other, float):
            return VectorClass(self.x * other,
                               self.y * other,
                               self.z *other)
